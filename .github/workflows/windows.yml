@@ -1,0 +1,77 @@
+# Windows check — runs the unit tests, the light gate on this repository, and an init-to-gate run in a fresh repository on windows-latest.
+name: windows
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      # The runner's git converts line endings by default. The repository pins LF in .gitattributes; this keeps test repositories on LF too.
+      - name: Keep LF line endings
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dev dependencies
+        run: npm ci
+      - name: Show tool versions
+        run: |
+          node --version
+          git --version
+          sh --version
+      - name: Unit tests
+        run: node --test "tests/*.test.mjs"
+      # The exposure check needs a denylist outside the repository. The real list is not in CI, so a placeholder rule proves only that the Windows path is read.
+      - name: Place a denylist in the user config folder
+        run: |
+          New-Item -ItemType Directory -Force -Path "$env:APPDATA\lanekit" | Out-Null
+          Set-Content -Path "$env:APPDATA\lanekit\denylist.txt" -Value 'lanekit-ci-placeholder-[0-9]{12}'
+      - name: Light gate on this repository
+        run: node kit/gate.mjs --profile light
+      - name: Init to gate in a fresh repository
+        run: |
+          $project = Join-Path $env:RUNNER_TEMP 'acme-app'
+          New-Item -ItemType Directory -Force -Path $project | Out-Null
+          Set-Location $project
+          git init -q -b main
+          git config user.name acme
+          git config user.email dev@example.com
+          Set-Content -Path package.json -Value '{ "name": "acme-app" }'
+          $lanekit = Join-Path $env:GITHUB_WORKSPACE 'bin\lanekit.cmd'
+          & $lanekit version
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+          & $lanekit init --yes --lang en --modules none --remote-gate git-hook --set-hooks-path --lock-baselines
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+          git add -A
+          git update-index --chmod=+x .githooks/pre-push
+          git commit -q -m "chore: lanekit init"
+          node scripts/lanekit/gate.mjs --profile light
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+          # The hook runs under the sh that ships with Git for Windows, as it does on a real push.
+          sh .githooks/pre-push
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+          # doctor exits 1 here because the two companion plugins are not installed; the output is kept for reading.
+          & $lanekit doctor
+          exit 0
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lanekit-evidence-windows
+          path: |
+            .lanekit/evidence/
+            ${{ runner.temp }}/acme-app/.lanekit/evidence/
+          include-hidden-files: true
+          if-no-files-found: ignore

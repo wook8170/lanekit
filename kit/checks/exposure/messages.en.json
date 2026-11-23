@@ -1,0 +1,6 @@
+{
+  "exposure.no-denylist": "No denylist. Skipped because the repository is private",
+  "exposure.summary": "{rules} rules · {count} findings · {allowed} allowed",
+  "exposure.found": "Matches the rule on line {number} of the denylist",
+  "exposure.found-in-history": "A commit in the history matches the rule on line {number} of the denylist"
+}

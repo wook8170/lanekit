@@ -1,0 +1,6 @@
+#!/bin/sh
+# lanekit pre-push hook: runs the light gate before a push and blocks the push when it fails.
+# Installed by `lanekit init` as .githooks/pre-push; active once `git config core.hooksPath .githooks` is set.
+# To skip a single check for one push, run the gate yourself with --skip <id>; the skip is recorded in the evidence file.
+root=$(git rev-parse --show-toplevel) || exit 1
+exec node "$root/scripts/lanekit/gate.mjs" --profile light

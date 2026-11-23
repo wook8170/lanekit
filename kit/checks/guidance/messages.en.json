@@ -1,0 +1,9 @@
+{
+  "guidance.no-files": "no guidance files found",
+  "guidance.summary": "{files} guidance file(s) · {count} finding(s)",
+  "guidance.size.lines": "{value} lines. The limit is {limit}",
+  "guidance.size.bytes": "{value} bytes. The limit is {limit}",
+  "guidance.duplicate-heading": "The section \"{title}\" also exists in {other}. Keep it in one place",
+  "guidance.absolute-path": "A machine-specific path or address is present: {match}",
+  "guidance.self-violation": "The guidance breaks its own writing rule: \"{match}\" → {suggest}"
+}

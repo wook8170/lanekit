@@ -1,0 +1,37 @@
+{
+  "name": "ts-fastify",
+  "summary": {
+    "ko": "Fastify 라우트 지표 4종과 ESLint 규칙 lanekit/no-reply-thenable 을 더한다",
+    "en": "Adds four Fastify route metrics and the ESLint rule lanekit/no-reply-thenable"
+  },
+  "requires": ["ts"],
+  "detect": {
+    "anyFile": [],
+    "anyDependency": ["fastify"]
+  },
+  "files": ["module.json", "route-rules.mjs", "eslint-reply-thenable.mjs"],
+  "config": {
+    "checks": {
+      "structure": {
+        "routes": {
+          "files": ["apps/*/src/routes/**/*.ts", "src/routes/**/*.ts"],
+          "routesPerFile": 15,
+          "route": { "warn": 80, "fail": 150 },
+          "owners": ["app", "fastify", "server", "instance", "router"],
+          "dbOwners": ["db", "tx", "trx"],
+          "dbMethods": ["get", "all", "run", "exec", "prepare", "withTransaction"],
+          "appDbPattern": "app\\.db\\.",
+          "serverTop": ""
+        }
+      }
+    }
+  },
+  "structure": {
+    "routeRules": "route-rules.mjs"
+  },
+  "eslint": {
+    "file": "eslint-reply-thenable.mjs",
+    "rule": "lanekit/no-reply-thenable",
+    "usage": "import ts from 'typescript'; import { replyThenableRules } from './scripts/lanekit/modules/ts-fastify/eslint-reply-thenable.mjs'; export default [replyThenableRules({ ts, files: ['src/**/*.ts'] })]"
+  }
+}

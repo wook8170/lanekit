@@ -1,0 +1,6 @@
+{
+  "tests.no-command": "No test command. Set one in checks.tests in the config",
+  "tests.no-changed-files": "No changed files, so the tests did not run",
+  "tests.passed": "The test command exited with 0 · output: {log}",
+  "tests.failed": "The test command exited with {code} · output: {log}"
+}

@@ -1,0 +1,6 @@
+{
+  "writing.no-docs": "No document matches the globs",
+  "writing.summary": "{docs} documents · {count} banned expressions · {chains} noun chains (warning only)",
+  "writing.found": "\"{text}\"",
+  "writing.found-with-suggest": "\"{text}\" → {suggest}"
+}

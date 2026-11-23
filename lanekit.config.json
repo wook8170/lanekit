@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "lang": "ko",
+  "repo": { "visibility": "public" },
+  "modules": ["ts"],
+  "remote_gate": "git-hook",
+  "checks": {
+    "structure": {
+      "mode": "fail",
+      "source": { "include": ["kit/**", "lib/**", "modules/**"], "exclude": [], "extensions": ["mjs"] },
+      "console": { "exempt": [] }
+    },
+    "guidance": { "mode": "fail" },
+    "tests": { "full": "node --test tests/*.test.mjs", "changed": "node --test tests/*.test.mjs" }
+  }
+}

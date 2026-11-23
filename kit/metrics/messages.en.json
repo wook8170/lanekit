@@ -1,0 +1,9 @@
+{
+  "delivery.header": "Delivery metrics · tags {tags} · {releases} releases · {days} days",
+  "delivery.frequency": "Deployment frequency (releases per 30 days): {value}",
+  "delivery.lead-time": "Median lead time (commit authored to tag, hours): {value}",
+  "delivery.patch-ratio": "Patch release ratio (patch tags ÷ all tags): {value}",
+  "delivery.caveat": "All values are approximations from tags. The patch release ratio is not the change failure rate, and time to restore cannot be known from tags alone.",
+  "delivery.unknown": "unknown",
+  "delivery.not-a-repo": "Not a git repository, so no metrics"
+}

@@ -1,0 +1,9 @@
+{
+  "guidance.no-files": "지침 파일이 없다",
+  "guidance.summary": "지침 파일 {files}개 · 찾은 것 {count}건",
+  "guidance.size.lines": "{value}줄이다. 상한은 {limit}줄이다",
+  "guidance.size.bytes": "{value}바이트다. 상한은 {limit}바이트다",
+  "guidance.duplicate-heading": "「{title}」 절이 {other} 에도 있다. 한 곳에만 둔다",
+  "guidance.absolute-path": "머신에 묶인 경로나 주소가 있다: {match}",
+  "guidance.self-violation": "지침이 자기 글쓰기 규칙을 어긴다: 「{match}」 → {suggest}"
+}

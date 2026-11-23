@@ -1,0 +1,9 @@
+{
+  "wiki.not-applicable": "문서 폴더도 문서 검색 설정도 없다",
+  "wiki.summary": "찾은 것 {count}건 · 색인 뒤에 바뀐 문서 {stale}개",
+  "wiki.search-missing": "문서 폴더가 있는데 docs_search.search 가 비어 있다. 위키 색인을 만들고 검색 명령을 적는다",
+  "wiki.index-missing": "색인의 기준 커밋을 읽을 수 없다: {file}. 색인을 만든다: {build}",
+  "wiki.index-commit-unknown": "색인을 만든 커밋 {commit} 을 이 저장소에서 찾을 수 없다. 색인을 다시 만든다: {build}",
+  "wiki.index-stale": "색인이 낡았다. 색인을 만든 커밋 {commit} 뒤에 문서 {count}개가 바뀌었다(예: {first}). 다시 만든다: {build}",
+  "wiki.build-fallback": "위키 색인기의 build 명령"
+}

@@ -1,0 +1,21 @@
+{
+  "secrets.summary": "도구 {tool} · 찾은 것 {count}건 · 허용 {allowed}건",
+  "secrets.found": "비밀값의 모양이 있다. 값은 출력하지 않는다",
+  "secrets.found-in-history": "이력의 커밋에 비밀값의 모양이 있다. 값은 출력하지 않는다",
+  "secrets.gitleaks-missing": "tool 이 gitleaks 인데 gitleaks 실행 파일을 찾지 못했다",
+  "secrets.gitleaks-failed": "gitleaks 가 오류로 끝났다. {detail}",
+  "audit.summary": "{manager} · 기준 {failOn} 이상 {blocking}건 · 허용 중 {accepted}건 · 기준 아래 {below}건",
+  "audit.no-lockfile": "잠금 파일이 없어 감사를 돌리지 않았다",
+  "audit.manager-missing": "{manager} 실행 파일을 찾지 못해 감사를 돌리지 않았다",
+  "audit.unreadable": "{manager} 의 감사 결과를 읽을 수 없다. 레지스트리에 닿지 못했을 수 있다. 감사를 하지 않은 것으로 남긴다",
+  "audit.blocking.none": "{package} · {id} · 심각도 {severity}",
+  "audit.blocking.expired": "{package} · {id} · 심각도 {severity} · 허용이 {expires} 에 끝났다",
+  "audit.blocking.invalid": "{package} · {id} · 심각도 {severity} · 허용 항목의 expires 가 YYYY-MM-DD 꼴이 아니다",
+  "sbom.written": "{file} 에 썼다 · 구성 요소 {components}개",
+  "sbom.failed": "SBOM 을 만들지 못했다. {detail}",
+  "provenance.written": "{file} 에 썼다",
+  "provenance.evidence-missing": "증거 파일이 없어 출처 문서를 쓰지 않았다. --no-evidence 없이 돌린다",
+  "provenance.evidence-partial": "일부 검사만 돌린 증거 파일을 해시했다. --only 없이 full 프로필로 다시 돌린다",
+  "provenance.evidence-dirty": "커밋하지 않은 변경이 있는 상태의 증거다",
+  "provenance.sbom-missing": "같은 커밋의 SBOM 이 없다. sbom 검사를 함께 돌린다"
+}

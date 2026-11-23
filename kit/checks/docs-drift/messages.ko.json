@@ -1,0 +1,14 @@
+{
+  "docs-drift.no-facts": "견줄 사실(facts)이 설정에 없다",
+  "docs-drift.summary": "사실 {facts}개 · 찾은 것 {count}건 · 미룬 명령 {deferred}개",
+  "docs-drift.mismatch": "[{fact}] 문서의 값 {stated} 이 코드에서 센 값 {actual} 과 다르다",
+  "docs-drift.pattern-not-found": "[{fact}] 문서에서 pattern 이 한 번도 맞지 않았다: {pattern}",
+  "docs-drift.pattern-invalid": "[{fact}] pattern 을 정규식으로 읽을 수 없다. {detail}",
+  "docs-drift.doc-missing": "[{fact}] 문서를 읽을 수 없다: {detail}",
+  "docs-drift.source-field-missing": "[{fact}] source 에 꼭 있어야 하는 칸이 비었다: {detail}",
+  "docs-drift.source-file-missing": "[{fact}] source 의 파일을 읽을 수 없다: {detail}",
+  "docs-drift.source-path-missing": "[{fact}] JSON 에 그 경로가 없다: {detail}",
+  "docs-drift.source-not-countable": "[{fact}] 배열이나 객체가 아니라 셀 수 없다: {detail}",
+  "docs-drift.source-command-failed": "[{fact}] 명령이 실패했다: {detail}",
+  "docs-drift.source-unreadable": "[{fact}] source 를 읽다가 오류가 났다. {detail}"
+}

@@ -1,0 +1,33 @@
+# lanekit 게이트 — PR 과 main push 에서 바뀐 파일 기준의 게이트를 돌리고, 증거 파일을 산출물로 올린다.
+name: lanekit-gate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # changed 프로필이 기준 커밋과 견주려면 이력이 필요하다.
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 의존성 설치
+        run: {{install_command}}
+      - name: 게이트 실행
+        run: node scripts/lanekit/gate.mjs --profile changed --base "${{ github.event.pull_request.base.sha || github.event.before }}"
+      - name: 증거 파일 올리기
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lanekit-evidence
+          path: .lanekit/evidence/
+          include-hidden-files: true

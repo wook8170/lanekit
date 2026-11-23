@@ -1,0 +1,6 @@
+{
+  "tests.no-command": "테스트 명령 없음. 설정의 checks.tests 에 명령을 적는다",
+  "tests.no-changed-files": "바뀐 파일이 없어 테스트를 돌리지 않았다",
+  "tests.passed": "테스트 명령이 0 으로 끝났다 · 출력: {log}",
+  "tests.failed": "테스트 명령이 {code} 로 끝났다 · 출력: {log}"
+}

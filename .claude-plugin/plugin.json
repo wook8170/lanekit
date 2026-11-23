@@ -1,0 +1,8 @@
+{
+  "name": "lanekit",
+  "version": "0.1.0",
+  "description": "Lays a development setup onto a new project in one step: guidance templates, a gate runner with ratchets and evidence files, and decision records. Enforcement hooks stay in lanekeeper; skills stay in wook-skills.",
+  "license": "MIT",
+  "keywords": ["gate", "ratchet", "scaffold", "evidence"],
+  "dependencies": ["lanekeeper", "wook-skills"]
+}

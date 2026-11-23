@@ -1,0 +1,7 @@
+# Code owners — a pull request that changes a path below needs approval from the people or teams listed.
+# Enforcement requires "Require review from Code Owners" in the hosting's branch protection. Remove the leading # and replace the names.
+
+# The gate and its configuration are reviewed by someone other than the author.
+# /scripts/lanekit/        @your-org/maintainers
+# /lanekit.config.json     @your-org/maintainers
+# /docs/decisions/         @your-org/maintainers

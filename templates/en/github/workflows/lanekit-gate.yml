@@ -1,0 +1,33 @@
+# lanekit gate — runs the changed-files gate on pull requests and pushes to main, and uploads the evidence files.
+name: lanekit-gate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # The changed profile compares against a base commit, so it needs history.
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: {{install_command}}
+      - name: Run the gate
+        run: node scripts/lanekit/gate.mjs --profile changed --base "${{ github.event.pull_request.base.sha || github.event.before }}"
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lanekit-evidence
+          path: .lanekit/evidence/
+          include-hidden-files: true

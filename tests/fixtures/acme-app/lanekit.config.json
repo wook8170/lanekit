@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "lang": "ko",
+  "repo": { "visibility": "private" },
+  "modules": [],
+  "checks": {
+    "guidance": {
+      "mode": "warn",
+      "files": ["CLAUDE.md", "AGENTS.md"],
+      "maxLines": { "CLAUDE.md": 6 },
+      "maxBytes": { "AGENTS.md": 600 }
+    }
+  }
+}

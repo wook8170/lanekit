@@ -1,0 +1,18 @@
+# lanekit 게이트 — 머지 요청과 기본 브랜치에서 바뀐 파일 기준의 게이트를 돌리고, 증거 파일을 산출물로 남긴다.
+# 루트의 .gitlab-ci.yml 에 아래 한 줄을 더해야 돈다.
+#   include: [{ local: ".gitlab/lanekit-gate.gitlab-ci.yml" }]
+lanekit-gate:
+  image: node:22
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  variables:
+    # changed 프로필이 기준 커밋과 견주려면 이력이 필요하다.
+    GIT_DEPTH: 0
+  script:
+    - {{install_command}}
+    - node scripts/lanekit/gate.mjs --profile changed --base "${CI_MERGE_REQUEST_DIFF_BASE_SHA:-$CI_COMMIT_BEFORE_SHA}"
+  artifacts:
+    when: always
+    paths:
+      - .lanekit/evidence/

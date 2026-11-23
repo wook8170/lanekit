@@ -1,0 +1,18 @@
+# lanekit gate — runs the changed-files gate on merge requests and the default branch, and keeps the evidence files as artifacts.
+# It only runs once the root .gitlab-ci.yml includes it:
+#   include: [{ local: ".gitlab/lanekit-gate.gitlab-ci.yml" }]
+lanekit-gate:
+  image: node:22
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  variables:
+    # The changed profile compares against a base commit, so it needs history.
+    GIT_DEPTH: 0
+  script:
+    - {{install_command}}
+    - node scripts/lanekit/gate.mjs --profile changed --base "${CI_MERGE_REQUEST_DIFF_BASE_SHA:-$CI_COMMIT_BEFORE_SHA}"
+  artifacts:
+    when: always
+    paths:
+      - .lanekit/evidence/

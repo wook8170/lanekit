@@ -1,0 +1,9 @@
+{
+  "delivery.header": "출하 지표 · 태그 {tags} · 출하 {releases}번 · 기간 {days}일",
+  "delivery.frequency": "배포 빈도(30일에 몇 번): {value}",
+  "delivery.lead-time": "리드 타임 중앙값(커밋 작성부터 태그까지, 시간): {value}",
+  "delivery.patch-ratio": "수리 출하 비율(패치 버전 태그 ÷ 전체 태그): {value}",
+  "delivery.caveat": "모두 태그로 구한 근삿값이다. 수리 출하 비율은 변경 실패율과 같은 값이 아니고, 복구 시간은 태그만으로 알 수 없다.",
+  "delivery.unknown": "알 수 없음",
+  "delivery.not-a-repo": "git 저장소가 아니라 지표를 낼 수 없다"
+}

@@ -1,0 +1,21 @@
+{
+  "secrets.summary": "tool {tool} · {count} findings · {allowed} allowed",
+  "secrets.found": "Looks like a secret. The value is not printed",
+  "secrets.found-in-history": "A commit in the history has something that looks like a secret. The value is not printed",
+  "secrets.gitleaks-missing": "tool is gitleaks but the gitleaks executable was not found",
+  "secrets.gitleaks-failed": "gitleaks ended with an error. {detail}",
+  "audit.summary": "{manager} · {blocking} at {failOn} or above · {accepted} accepted · {below} below the threshold",
+  "audit.no-lockfile": "No lockfile, so the audit did not run",
+  "audit.manager-missing": "The {manager} executable was not found, so the audit did not run",
+  "audit.unreadable": "Cannot read the {manager} audit result. The registry may be unreachable. Recorded as not audited",
+  "audit.blocking.none": "{package} · {id} · severity {severity}",
+  "audit.blocking.expired": "{package} · {id} · severity {severity} · the allowance ended on {expires}",
+  "audit.blocking.invalid": "{package} · {id} · severity {severity} · the allowance's expires is not YYYY-MM-DD",
+  "sbom.written": "Wrote {file} · {components} components",
+  "sbom.failed": "Could not build the SBOM. {detail}",
+  "provenance.written": "Wrote {file}",
+  "provenance.evidence-missing": "No evidence file, so the provenance document was not written. Run without --no-evidence",
+  "provenance.evidence-partial": "The hashed evidence file covers only some checks. Run the full profile again without --only",
+  "provenance.evidence-dirty": "The evidence was recorded with uncommitted changes",
+  "provenance.sbom-missing": "No SBOM for this commit. Run the sbom check together"
+}

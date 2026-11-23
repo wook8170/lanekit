@@ -1,0 +1,14 @@
+{
+  "docs-drift.no-facts": "No facts to compare in the config",
+  "docs-drift.summary": "{facts} facts · {count} findings · {deferred} commands deferred",
+  "docs-drift.mismatch": "[{fact}] The document says {stated} but the code gives {actual}",
+  "docs-drift.pattern-not-found": "[{fact}] The pattern never matched in the document: {pattern}",
+  "docs-drift.pattern-invalid": "[{fact}] The pattern is not a valid regular expression. {detail}",
+  "docs-drift.doc-missing": "[{fact}] Cannot read the document: {detail}",
+  "docs-drift.source-field-missing": "[{fact}] A required source field is empty: {detail}",
+  "docs-drift.source-file-missing": "[{fact}] Cannot read the source file: {detail}",
+  "docs-drift.source-path-missing": "[{fact}] The JSON has no such path: {detail}",
+  "docs-drift.source-not-countable": "[{fact}] Not an array or object, so it cannot be counted: {detail}",
+  "docs-drift.source-command-failed": "[{fact}] The command failed: {detail}",
+  "docs-drift.source-unreadable": "[{fact}] Failed while reading the source. {detail}"
+}

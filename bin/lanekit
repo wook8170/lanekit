@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+// lanekit 명령의 진입점 — 인자를 lib/cli.mjs 에 넘기고 종료 코드를 그대로 낸다.
+// 부르는 곳: 터미널, 그리고 skills/ 의 init · doctor · update 스킬.
+// 먼저 읽을 파일: lib/cli.mjs.
+import { runCli } from '../lib/cli.mjs'
+
+process.exitCode = await runCli({
+  argv: process.argv.slice(2),
+  cwd: process.cwd(),
+  write: (text) => process.stdout.write(text),
+})

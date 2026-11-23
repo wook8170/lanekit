@@ -1,0 +1,9 @@
+{
+  "wiki.not-applicable": "No docs folder and no docs search setting",
+  "wiki.summary": "{count} findings · {stale} documents changed after the index",
+  "wiki.search-missing": "There is a docs folder but docs_search.search is empty. Build a wiki index and set the search command",
+  "wiki.index-missing": "Cannot read the commit the index was built from: {file}. Build the index: {build}",
+  "wiki.index-commit-unknown": "The commit the index was built from, {commit}, is not in this repository. Rebuild the index: {build}",
+  "wiki.index-stale": "The index is stale. {count} documents changed after commit {commit} (for example {first}). Rebuild: {build}",
+  "wiki.build-fallback": "the build command of the wiki indexer"
+}

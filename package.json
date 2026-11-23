@@ -1,0 +1,21 @@
+{
+  "name": "lanekit",
+  "version": "0.1.0",
+  "description": "Project scaffold and gate runner for Claude Code projects",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "lanekit": "bin/lanekit"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "gate": "node kit/gate.mjs --profile light"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  }
+}

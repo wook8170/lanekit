@@ -1,0 +1,38 @@
+{
+  "name": "ts",
+  "summary": {
+    "ko": "TypeScript · JavaScript 소스의 구조 검사(structure)를 켠다",
+    "en": "Turns on the structure check for TypeScript and JavaScript sources"
+  },
+  "requires": [],
+  "detect": {
+    "anyFile": ["tsconfig.json"],
+    "anyDependency": ["typescript"]
+  },
+  "files": ["module.json"],
+  "config": {
+    "checks": {
+      "structure": {
+        "source": {
+          "include": ["src/**", "apps/*/src/**", "packages/*/src/**"],
+          "exclude": ["**/*.test.*", "**/*.spec.*", "**/*.d.ts", "**/dist/**", "**/generated/**"],
+          "extensions": ["ts", "tsx", "mts", "js", "mjs", "vue"]
+        }
+      }
+    }
+  },
+  "testCommands": [
+    { "dependency": "vitest", "full": "npx vitest run", "changed": "npx vitest related --run {files}" },
+    { "dependency": "jest", "full": "npx jest", "changed": "npx jest --findRelatedTests {files}" },
+    { "dependency": null, "full": "node --test", "changed": "node --test" }
+  ],
+  "packageScripts": {
+    "gate": "node scripts/lanekit/gate.mjs --profile light"
+  },
+  "needs": {
+    "typescript": {
+      "ko": "typescript 5 또는 6 이 설치돼 있어야 한다. 컴파일러 API 가 없는 버전에서는 structure 검사를 건너뛴다",
+      "en": "Needs typescript 5 or 6 installed. The structure check is skipped on versions without the compiler API"
+    }
+  }
+}
