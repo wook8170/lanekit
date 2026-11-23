@@ -37,6 +37,8 @@
   "init.hooks.failed": "Could not set the git hooks folder. Check that this is a git repository",
   "init.hooks.no-hook": "No pre-push hook was placed, so the git hooks folder was not set",
   "init.hooks.ask": "To turn on the pre-push hook, pass --set-hooks-path or run `git config core.hooksPath .githooks`",
+  "init.hook-mode.staged": "Staged {file} in git with the executable bit (nothing was committed). Windows files have no executable bit, so the hook runs in macOS and Linux clones only when it is staged this way",
+  "init.hook-mode.failed": "Could not stage {file} in git with the executable bit. Run `git add --chmod=+x {file}` before committing",
   "init.gate.heading": "First gate run (light)",
   "init.gate.exit": "Gate exit code: {code}",
   "init.relock.heading": "Baseline lock",

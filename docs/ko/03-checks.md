@@ -73,7 +73,7 @@ node scripts/lanekit/gate.mjs --list
 
 | 수단 | 놓는 파일 | 한계 |
 |---|---|---|
-| git 훅 | `.githooks/pre-push` | 복제본마다 `git config core.hooksPath .githooks` 를 한 번 해야 한다. 건너뛸 수 있다. Windows 에서 훅을 처음 올릴 때는 `git add --chmod=+x .githooks/pre-push` 를 쓴다. 그래야 macOS · Linux 복제본에서 훅이 돈다 |
+| git 훅 | `.githooks/pre-push` | 복제본마다 `git config core.hooksPath .githooks` 를 한 번 해야 한다. 건너뛸 수 있다. Windows 에서는 init 이 훅을 실행 권한과 함께 git 에 올려 둔다(커밋은 하지 않는다). 그래야 macOS · Linux 복제본에서 훅이 돈다 |
 | GitHub Actions | `.github/workflows/lanekit-gate.yml` | 브랜치 보호에서 이 검사를 필수로 지정해야 머지가 막힌다 |
 | GitLab CI | `.gitlab/lanekit-gate.gitlab-ci.yml` | 루트 `.gitlab-ci.yml` 에 `include` 한 줄을 더해야 돈다 |
 

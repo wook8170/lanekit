@@ -12,11 +12,14 @@ import { callCheck, fakeTool, rulesOf, withBarePath } from './check-helpers.mjs'
 import { commitAll, gate, git, makeProject, readJson } from './helpers.mjs'
 
 const SBOM_DOCUMENT = { bomFormat: 'CycloneDX', specVersion: '1.5', components: [{ name: 'left-pad' }, { name: 'tiny-lib' }] }
-const SBOM_COMMAND = `echo '${JSON.stringify(SBOM_DOCUMENT)}'`
+// sh 와 cmd.exe 가 같게 읽는 명령만 쓴다. JSON 을 명령 줄에 적으면 따옴표를 두 셸이 다르게 읽으므로, 문서를 내는 스크립트를 프로젝트에 둔다.
+const SBOM_SCRIPT = 'print-sbom.mjs'
+const SBOM_COMMAND = `node ${SBOM_SCRIPT}`
+const FAILING_COMMAND = `node -e "console.error('broken'); process.exit(4)"`
 const sha256Of = (file) => `sha256:${createHash('sha256').update(readFileSync(file)).digest('hex')}`
 
 const project = (sbomCommand = SBOM_COMMAND) =>
-  makeProject({ build: { command: 'npm run build' }, checks: { sbom: { command: sbomCommand }, structure: { mode: 'off' }, secrets: { tool: 'builtin' }, tests: { mode: 'off' }, audit: { mode: 'off' } } }, { 'a.txt': 'a\n' })
+  makeProject({ build: { command: 'npm run build' }, checks: { sbom: { command: sbomCommand }, structure: { mode: 'off' }, secrets: { tool: 'builtin' }, tests: { mode: 'off' }, audit: { mode: 'off' } } }, { 'a.txt': 'a\n', [SBOM_SCRIPT]: `process.stdout.write(${JSON.stringify(JSON.stringify(SBOM_DOCUMENT))})\n` })
 
 test('sbom: 설정한 명령의 출력을 커밋 이름으로 쓴다', async () => {
   const dir = project()
@@ -39,7 +42,7 @@ process.stdout.write(${JSON.stringify(JSON.stringify(SBOM_DOCUMENT))})`)
 })
 
 test('sbom: 만들 수 없으면 찾은 것으로 알리고 파일을 쓰지 않는다', async () => {
-  const failing = project('echo broken >&2; exit 4')
+  const failing = project(FAILING_COMMAND)
   const commit = commitAll(failing)
   const result = await callCheck(runSbom, 'security', failing, { profile: 'full' })
   assert.deepEqual(rulesOf(result), ['sbom-failed'])

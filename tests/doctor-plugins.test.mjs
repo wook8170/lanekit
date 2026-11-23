@@ -95,8 +95,10 @@ test('I4: 메모리 색인이 150줄이나 20 KB 를 넘으면 warn 이고, 찾�
 })
 
 test('메모리 폴더 이름은 저장소 경로의 글자 · 숫자가 아닌 자리를 - 로 바꾼 것이다', () => {
-  const machine = { home: '/home/dev', env: {} }
-  assert.equal(memoryIndexPath(machine, '/work/acme_app.v2'), '/home/dev/.claude/projects/-work-acme-app-v2/memory/MEMORY.md')
+  // 폴더를 잇는 글자는 플랫폼의 것이다. 보려는 것은 저장소 경로에서 만든 폴더 이름이다.
+  const machine = { home: join('home', 'dev'), env: {} }
+  assert.equal(memoryIndexPath(machine, '/work/acme_app.v2'), join('home', 'dev', '.claude', 'projects', '-work-acme-app-v2', 'memory', 'MEMORY.md'))
+  assert.equal(memoryIndexPath(machine, 'C:\\work\\acme app'), join('home', 'dev', '.claude', 'projects', 'C--work-acme-app', 'memory', 'MEMORY.md'), 'Windows 의 저장소 경로')
 })
 
 test('E1: 공개 저장소인데 금지어 목록이 없으면 fail 이다', () => {

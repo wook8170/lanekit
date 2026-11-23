@@ -37,6 +37,8 @@
   "init.hooks.failed": "git 훅 폴더를 설정하지 못했다. git 저장소인지 확인한다",
   "init.hooks.no-hook": "pre-push 훅을 놓지 않았으므로 git 훅 폴더를 설정하지 않았다",
   "init.hooks.ask": "pre-push 훅을 켜려면 --set-hooks-path 를 붙이거나 `git config core.hooksPath .githooks` 를 실행한다",
+  "init.hook-mode.staged": "{file} 을 실행 권한과 함께 git 에 올려 두었다(커밋은 하지 않았다). Windows 의 파일에는 실행 권한이 없어서, 이렇게 올려야 macOS · Linux 복제본에서 훅이 돈다",
+  "init.hook-mode.failed": "{file} 을 실행 권한과 함께 git 에 올리지 못했다. 커밋하기 전에 `git add --chmod=+x {file}` 를 실행한다",
   "init.gate.heading": "게이트 첫 실행(light)",
   "init.gate.exit": "게이트 종료 코드: {code}",
   "init.relock.heading": "기준선 잠금",

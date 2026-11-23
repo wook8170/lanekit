@@ -73,7 +73,7 @@ Every gate run leaves `.lanekit/evidence/<first 12 characters of the commit>-<pr
 
 | Means | File placed | Limit |
 |---|---|---|
-| git hook | `.githooks/pre-push` | Each clone needs `git config core.hooksPath .githooks` once. It can be bypassed. On Windows, add the hook the first time with `git add --chmod=+x .githooks/pre-push`, so that it runs in macOS and Linux clones |
+| git hook | `.githooks/pre-push` | Each clone needs `git config core.hooksPath .githooks` once. It can be bypassed. On Windows, init stages the hook in git with the executable bit (it does not commit), so that the hook runs in macOS and Linux clones |
 | GitHub Actions | `.github/workflows/lanekit-gate.yml` | Merges are blocked only when branch protection requires this check |
 | GitLab CI | `.gitlab/lanekit-gate.gitlab-ci.yml` | Runs only after an `include` line is added to the root `.gitlab-ci.yml` |
 

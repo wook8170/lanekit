@@ -29,7 +29,7 @@ First version.
 - macOS, Linux and Windows are supported. Platform differences live in one file, `kit/lib/platform.mjs`.
 - On Windows the denylist is read from `%APPDATA%\lanekit\denylist.txt`, tools installed as `.cmd` files (npm, pnpm, yarn) are found through `PATHEXT` and run with quoted arguments, and file names passed to the changed-files test command are quoted for cmd.exe.
 - Files with CRLF line endings are read the same as LF files by every check, and the lock file hashes content with line endings normalised, so a CRLF checkout is not reported as modified.
-- `init` writes a `.gitattributes` that keeps the hook and `scripts/lanekit/` on LF. `lanekit doctor` G3 warns when the hook has CRLF line endings, and on Windows when the hook is in the git index without the executable bit.
+- `init` writes a `.gitattributes` that keeps the hook and `scripts/lanekit/` on LF. `lanekit doctor` G3 warns when the hook has CRLF line endings, and on Windows when the hook is in the git index without the executable bit. On Windows `init` stages the hook with the executable bit and does not commit.
 - Paths in the gate output, the evidence file and the provenance document use `/` on every platform.
 
 ### Templates

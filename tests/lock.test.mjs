@@ -2,14 +2,14 @@
 // 대상: lib/lock.mjs · lib/cli.mjs · lib/messages.mjs.
 // 먼저 읽을 파일: ../lib/lock.mjs.
 import assert from 'node:assert/strict'
-import { execFileSync } from 'node:child_process'
 import { rmSync } from 'node:fs'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { test } from 'node:test'
+import { runTool } from '../kit/lib/exec.mjs'
 import { runCli, splitArgs } from '../lib/cli.mjs'
 import { buildLock, compareWithLock, diffLock, hashFile, listFiles, readLock, writeLock } from '../lib/lock.mjs'
-import { makeTempDir, readJson, writeFiles } from './helpers.mjs'
+import { IS_WINDOWS, makeTempDir, readJson, writeFiles } from './helpers.mjs'
 
 const VERSION = readJson(new URL('../package.json', import.meta.url)).version
 
@@ -114,6 +114,8 @@ test('splitArgs 는 --lang 을 떼어 내고 하위 명령과 나머지를 가�
 })
 
 test('bin/lanekit 을 실행 파일로 부를 수 있다', () => {
-  const bin = fileURLToPath(new URL('../bin/lanekit', import.meta.url))
-  assert.equal(execFileSync(bin, ['version'], { encoding: 'utf8' }), `${VERSION}\n`)
+  // Windows 는 첫 줄(#!)로 실행하지 못한다. 그래서 그 플랫폼의 진입점인 lanekit.cmd 를 제품과 같은 방법(runTool)으로 부른다.
+  const bin = fileURLToPath(new URL(IS_WINDOWS ? '../bin/lanekit.cmd' : '../bin/lanekit', import.meta.url))
+  const called = runTool(bin, ['version'])
+  assert.deepEqual([called.code, called.stdout.trim()], [0, VERSION], called.stderr || called.startError)
 })

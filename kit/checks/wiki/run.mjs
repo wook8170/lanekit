@@ -12,7 +12,8 @@ export const meta = {
   ratchetable: false,
 }
 
-const LANEKEEPER_CONFIG = join('.lanekeeper', 'config.json')
+// 찾은 것의 file 칸에도 쓰는 경로라 어느 플랫폼에서든 `/` 로 적는다.
+const LANEKEEPER_CONFIG = '.lanekeeper/config.json'
 const WIKI_CONFIG_NAME = 'config.json'
 
 const readJson = (file) => (existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) : null)

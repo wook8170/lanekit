@@ -55,7 +55,9 @@ jobs:
           & $lanekit init --yes --lang en --modules none --remote-gate git-hook --set-hooks-path --lock-baselines
           if ($LASTEXITCODE -ne 0) { exit 1 }
           git add -A
-          git update-index --chmod=+x .githooks/pre-push
+          # init staged the hook with the executable bit; the index must still say 100755 after `git add -A`.
+          $staged = git ls-files --stage -- .githooks/pre-push
+          if (-not $staged.StartsWith('100755')) { Write-Output "hook mode in index: $staged"; exit 1 }
           git commit -q -m "chore: lanekit init"
           node scripts/lanekit/gate.mjs --profile light
           if ($LASTEXITCODE -ne 0) { exit 1 }

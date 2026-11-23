@@ -27,6 +27,7 @@ import {
 } from '../kit/lib/platform.mjs'
 import { judgeHook } from '../lib/doctor-checks/g3-push-hook.mjs'
 import { denylistPath } from '../lib/doctor-checks/e1-denylist.mjs'
+import { stageHookAsExecutable } from '../lib/init-followup.mjs'
 import { planGitignore, planInit } from '../lib/init-plan.mjs'
 import { hashContent } from '../lib/lock.mjs'
 import { makeTempDir, writeFiles } from './helpers.mjs'
@@ -181,4 +182,20 @@ test('G3: Windows 는 권한 비트 대신 git 에 올라간 권한과 줄바꿈
   assert.equal(judgeHook({ content: lf, mode: 0o100644, indexEntry: staged('100644') }, LINUX), 'not-executable')
   assert.equal(judgeHook({ content: lf, mode: 0o100755, indexEntry: staged('100644') }, MAC), 'ok', '그 밖의 플랫폼은 파일의 권한 비트만 본다')
   assert.equal(judgeHook({ content: lf.replaceAll('\n', '\r\n'), mode: 0o100755, indexEntry: '' }, LINUX), 'crlf')
+})
+
+test('init: Windows 에서는 훅을 실행 권한과 함께 git 에 올리고, 그 밖의 플랫폼과 훅이 없는 저장소에서는 git 을 부르지 않는다', () => {
+  const root = makeTempDir()
+  const calls = []
+  const execWith = (code) => (command, args) => {
+    calls.push([command, ...args].join(' '))
+    return { code, stdout: '', stderr: '' }
+  }
+  assert.deepEqual(stageHookAsExecutable({ root, exec: execWith(0), platform: WIN }), { outcome: 'not-needed' }, '훅을 놓지 않았다')
+  writeFiles(root, { '.githooks/pre-push': '#!/bin/sh\n' })
+  assert.deepEqual(stageHookAsExecutable({ root, exec: execWith(0), platform: LINUX }), { outcome: 'not-needed' })
+  assert.deepEqual(calls, [])
+  assert.deepEqual(stageHookAsExecutable({ root, exec: execWith(0), platform: WIN }), { outcome: 'staged' })
+  assert.deepEqual(calls, ['git update-index --add --chmod=+x -- .githooks/pre-push'])
+  assert.deepEqual(stageHookAsExecutable({ root, exec: execWith(128), platform: WIN }), { outcome: 'failed' }, 'git 저장소가 아니다')
 })
